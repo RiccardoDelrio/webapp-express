@@ -11,11 +11,16 @@ app.use(cors({
 //bodyparser middleware
 app.use(express.json());
 
-
+//asset statici
 app.use(express.static('public'));
 
+//server in ascolto 
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
 });
 
 
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
