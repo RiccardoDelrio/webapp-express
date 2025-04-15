@@ -3,6 +3,8 @@ const cors = require('cors');
 const app = express();
 const port=3000;
 const movie = require('./routes/movie.js');
+const serverErrors = require('./middleware/serverError.js');
+const notFound = require('./middleware/notfound.js');
 //middleware
 app.use(cors({
 	origin: process.env.FONT_URL || 'http://localhost:5173',
@@ -26,4 +28,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/movies', movie);
-3
+
+//middleware for server errors
+
+app.use(serverErrors);
+
+//middleware for 404 errors
+app.use(notFound);3
