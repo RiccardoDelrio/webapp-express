@@ -36,7 +36,28 @@ function show(req, res) {
       });
     });
   }
+  function create(req, res) {
+    const movieId = Number(req.params.id);
+    const { name, vote, text } = req.body;
+    
+    // Validate vote is between 1 and 5
+    if (vote < 1 || vote > 5) {
+        return res.status(400).json({ error: 'Vote must be between 1 and 5' });
+    }
+
+    const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [movieId, name, vote, text], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+        res.status(201).json({ id: results.insertId });
+    });
+}
+
 module.exports = {
     index,
-    show
+    show,
+    create
 };

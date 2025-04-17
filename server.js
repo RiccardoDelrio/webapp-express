@@ -16,7 +16,7 @@ app.use(express.json());
 //asset statici
 app.use(express.static('public'));
 
-//server in ascolto 
+//server in ascolto s
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
 });
@@ -34,4 +34,4 @@ app.use('/api/movies', movie);
 app.use(serverErrors);
 
 //middleware for 404 errors
-app.use(notFound);3
+app.use(notFound);
